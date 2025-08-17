@@ -14,7 +14,7 @@ Funcionalidade: Gerenciamento da Tabela da Web SUCCESS
 
     Cenário: Realizar alteração de dados do formulário de cadastro
         E clica no icone de editar do usuario desejado
-        Quando edita todos os dados ja cadastrados
+        Quando o usuario edita todos os dados ja cadastrados
         E submete o cadastro
         Então o sistema exibirá todos os dados do usuário editado
     

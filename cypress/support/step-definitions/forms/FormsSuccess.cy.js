@@ -12,7 +12,7 @@ Then('o sistema exibirá o usuario cadastrado na tabela', () => {
     cy.validarUsuario()
 })
 
-When('edita todos os dados ja cadastrados', () => {
+When('o usuario edita todos os dados ja cadastrados', () => {
     cy.editarDadosCadastrados()
 })
 
