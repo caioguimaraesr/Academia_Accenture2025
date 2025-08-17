@@ -42,7 +42,7 @@ Cypress.Commands.add('acessarFormularioCadastro', () => {
 
 Cypress.Commands.add('formsComDadosValidos', () => {
     const dadosUsuario = gerarDadosFakes()
-    Cypress.env('userData', { ...dadosUsuario })
+    Cypress.env('dadosUsuario', { ...dadosUsuario })
     preencherDados(dadosUsuario)
 })
 
@@ -51,15 +51,15 @@ Cypress.Commands.add('submitForms', () => {
 })
     
 Cypress.Commands.add('validarUsuario', () => {
-    const userData = Cypress.env('userData')
+    const dadosUsuario = Cypress.env('dadosUsuario')
 
     cy.get(TABLE_USER)
-    .should('contain' , userData.firstName)
-    .and('contain', userData.lastName)
-    .and('contain', userData.age)
-    .and('contain', userData.email)
-    .and('contain', userData.salary)
-    .and('contain', userData.department)
+    .should('contain' , dadosUsuario.firstName)
+    .and('contain', dadosUsuario.lastName)
+    .and('contain', dadosUsuario.age)
+    .and('contain', dadosUsuario.email)
+    .and('contain', dadosUsuario.salary)
+    .and('contain', dadosUsuario.department)
 })
 
 Cypress.Commands.add('clickEditIcon', () => {
@@ -68,7 +68,7 @@ Cypress.Commands.add('clickEditIcon', () => {
 
 Cypress.Commands.add('editarDadosCadastrados', () => {
     const novosDadosUsuario = gerarDadosFakes()
-    Cypress.env('userData', { ...novosDadosUsuario })
+    Cypress.env('dadosUsuario', { ...novosDadosUsuario })
     preencherDados(novosDadosUsuario)
 })
 
