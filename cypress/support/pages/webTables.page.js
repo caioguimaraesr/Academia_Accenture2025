@@ -28,12 +28,12 @@ function gerarDadosFakes() {
 }
 
 function preencherDados(dados) {
-    cy.get(SELECT_FORMS.FIRST_NAME).should('be.visible').clear().type(dados.firstName)
-    cy.get(SELECT_FORMS.LAST_NAME).should('be.visible').clear().type(dados.lastName)
-    cy.get(SELECT_FORMS.EMAIL).should('be.visible').clear().type(dados.email)
-    cy.get(SELECT_FORMS.AGE).should('be.visible').clear().type(dados.age)
-    cy.get(SELECT_FORMS.SALARY).should('be.visible').clear().type(dados.salary)
-    cy.get(SELECT_FORMS.DEPARTAMENT).should('be.visible').clear().type(dados.department)
+    cy.get(SELECT_FORMS.FIRST_NAME).clear().type(dados.firstName, {log: false})
+    cy.get(SELECT_FORMS.LAST_NAME).clear().type(dados.lastName, {log: false})
+    cy.get(SELECT_FORMS.EMAIL).clear().type(dados.email, {log: false})
+    cy.get(SELECT_FORMS.AGE).clear().type(dados.age, {log: false})
+    cy.get(SELECT_FORMS.SALARY).clear().type(dados.salary, {log: false})
+    cy.get(SELECT_FORMS.DEPARTAMENT).clear().type(dados.department, {log: false})
 }
 
 Cypress.Commands.add('acessarFormularioCadastro', () => {
@@ -84,18 +84,40 @@ Cypress.Commands.add('validarUsuarioDeletado', () => {
 })
 
 Cypress.Commands.add('formsEmailInvalido', () => {
-    cy.get(SELECT_FORMS.FIRST_NAME).clear().type(Cypress.env('FIRST_NAME'), {log: false})
-    cy.get(SELECT_FORMS.LAST_NAME).clear().type(Cypress.env('LAST_NAME'), {log: false})
-    cy.get(SELECT_FORMS.EMAIL).clear().type(Cypress.env('USER_EMAIL_INVALID'), {log: false})
-    cy.get(SELECT_FORMS.AGE).clear().type(Cypress.env('AGE'), {log: false})
-    cy.get(SELECT_FORMS.SALARY).clear().type(Cypress.env('SALARY'), {log: false})
-    cy.get(SELECT_FORMS.DEPARTAMENT).clear().type(Cypress.env('DEPARTMENT'), {log: false})
+    const dados = {
+        firstName: Cypress.env('FIRST_NAME'),
+        lastName: Cypress.env('LAST_NAME'),
+        email: Cypress.env('USER_EMAIL_INVALID'),
+        age: Cypress.env('AGE'),
+        salary: Cypress.env('SALARY'),
+        department: Cypress.env('DEPARTMENT')
+    }
+
+    preencherDados(dados)
 })
-s
+
 Cypress.Commands.add('permancerForms', () => {
     cy.get(H1_FORMS).should('be.visible')
 })
 
 Cypress.Commands.add('campoInvalido', () => {
     cy.get(SELECT_FORMS.EMAIL).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+})
+
+Cypress.Commands.add('formsCamposVazios', () => {
+    cy.get(SELECT_FORMS.FIRST_NAME).clear().should('be.visible')
+    cy.get(SELECT_FORMS.LAST_NAME).clear().should('be.visible')
+    cy.get(SELECT_FORMS.EMAIL).clear().should('be.visible')
+    cy.get(SELECT_FORMS.AGE).clear().should('be.visible')
+    cy.get(SELECT_FORMS.SALARY).clear().should('be.visible')
+    cy.get(SELECT_FORMS.DEPARTAMENT).clear().should('be.visible')
+})
+
+Cypress.Commands.add('camposInvalidos', () => {
+    cy.get(SELECT_FORMS.FIRST_NAME).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.get(SELECT_FORMS.LAST_NAME).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.get(SELECT_FORMS.EMAIL).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.get(SELECT_FORMS.AGE).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.get(SELECT_FORMS.SALARY).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.get(SELECT_FORMS.DEPARTAMENT).should('have.css', 'border-color', 'rgb(220, 53, 69)')
 })
