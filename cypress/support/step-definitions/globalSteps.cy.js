@@ -9,3 +9,11 @@ When('clica em Add para adicionar um novo formulário de cadastro', () => {
 
     cy.log('Usuário cadastrado com sucesso!')
 })
+
+Then('o sistema permanecerá no formulário de cadastro', () => {
+    cy.permancerForms()
+})
+
+And('submete o cadastro', () => {
+    cy.submitForms()
+})

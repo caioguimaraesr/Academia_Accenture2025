@@ -4,10 +4,6 @@ When('preenche todos os campos obrigatórios com dados válidos', () => {
     cy.formsComDadosValidos()
 })
 
-And('submete o cadastro', () => {
-    cy.submitForms()
-})
-
 And('clica no icone de editar do usuario desejado', () => {
     cy.clickEditIcon()
 })

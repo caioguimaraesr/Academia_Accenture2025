@@ -21,7 +21,7 @@ function gerarDadosFakes() {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
         email: faker.internet.email(),
-        age: faker.number.int({min: 1, max:120}),
+        age: faker.number.int({min: 1, max: 99}),
         salary: faker.number.int({ min: 500, max: 50000 }),
         department: faker.helpers.arrayElement(["Compliance", "Legal", "Insurance"])
     }
@@ -42,8 +42,8 @@ Cypress.Commands.add('acessarFormularioCadastro', () => {
 
 Cypress.Commands.add('formsComDadosValidos', () => {
     const dadosUsuario = gerarDadosFakes()
-    preencherDados(dadosUsuario)
     Cypress.env('userData', { ...dadosUsuario })
+    preencherDados(dadosUsuario)
 })
 
 Cypress.Commands.add('submitForms', () => {
@@ -54,12 +54,12 @@ Cypress.Commands.add('validarUsuario', () => {
     const userData = Cypress.env('userData')
 
     cy.get(TABLE_USER)
-    .should('contain' , userData.firstName, {log: false})
-    .and('contain', userData.lastName, {log: false})
-    .and('contain', userData.age, {log: false})
-    .and('contain', userData.email, {log: false})
-    .and('contain', userData.salary, {log: false})
-    .and('contain', userData.department, {log: false})
+    .should('contain' , userData.firstName)
+    .and('contain', userData.lastName)
+    .and('contain', userData.age)
+    .and('contain', userData.email)
+    .and('contain', userData.salary)
+    .and('contain', userData.department)
 })
 
 Cypress.Commands.add('clickEditIcon', () => {
@@ -68,8 +68,8 @@ Cypress.Commands.add('clickEditIcon', () => {
 
 Cypress.Commands.add('editarDadosCadastrados', () => {
     const novosDadosUsuario = gerarDadosFakes()
-    preencherDados(novosDadosUsuario)
     Cypress.env('userData', { ...novosDadosUsuario })
+    preencherDados(novosDadosUsuario)
 })
 
 Cypress.Commands.add('clickRemoveIcon', () => {
@@ -105,19 +105,53 @@ Cypress.Commands.add('campoInvalido', () => {
 })
 
 Cypress.Commands.add('formsCamposVazios', () => {
-    cy.get(SELECT_FORMS.FIRST_NAME).clear().should('be.visible')
-    cy.get(SELECT_FORMS.LAST_NAME).clear().should('be.visible')
-    cy.get(SELECT_FORMS.EMAIL).clear().should('be.visible')
-    cy.get(SELECT_FORMS.AGE).clear().should('be.visible')
-    cy.get(SELECT_FORMS.SALARY).clear().should('be.visible')
-    cy.get(SELECT_FORMS.DEPARTAMENT).clear().should('be.visible')
+    cy.get(SELECT_FORMS.FIRST_NAME).clear().should('have.value', '')
+    cy.get(SELECT_FORMS.LAST_NAME).clear().should('have.value', '')
+    cy.get(SELECT_FORMS.EMAIL).clear().should('have.value', '')
+    cy.get(SELECT_FORMS.AGE).clear().should('have.value', '')
+    cy.get(SELECT_FORMS.SALARY).clear().should('have.value', '')
+    cy.get(SELECT_FORMS.DEPARTAMENT).clear().should('have.value', '')
 })
 
-Cypress.Commands.add('camposInvalidos', () => {
+Cypress.Commands.add('verificarCamposInvalidos', () => {
     cy.get(SELECT_FORMS.FIRST_NAME).should('have.css', 'border-color', 'rgb(220, 53, 69)')
     cy.get(SELECT_FORMS.LAST_NAME).should('have.css', 'border-color', 'rgb(220, 53, 69)')
     cy.get(SELECT_FORMS.EMAIL).should('have.css', 'border-color', 'rgb(220, 53, 69)')
     cy.get(SELECT_FORMS.AGE).should('have.css', 'border-color', 'rgb(220, 53, 69)')
     cy.get(SELECT_FORMS.SALARY).should('have.css', 'border-color', 'rgb(220, 53, 69)')
     cy.get(SELECT_FORMS.DEPARTAMENT).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+})
+
+Cypress.Commands.add('campoSalarioNegativo', () => {
+    const dados = {
+        firstName: Cypress.env('FIRST_NAME'),
+        lastName: Cypress.env('LAST_NAME'),
+        email: Cypress.env('EMAIL'),
+        age: Cypress.env('AGE'),
+        salary: Cypress.env('USER_SALARY_INVALID'),
+        department: Cypress.env('DEPARTMENT')
+    }
+    
+    preencherDados(dados)
+})
+
+Cypress.Commands.add('campoIdadeNegativo', () => {
+    const dados = {
+        firstName: Cypress.env('FIRST_NAME'),
+        lastName: Cypress.env('LAST_NAME'),
+        email: Cypress.env('EMAIL'),
+        age: Cypress.env('USER_AGE_INVALID'),
+        salary: Cypress.env('SALARY'),
+        department: Cypress.env('DEPARTMENT')
+    }
+    
+    preencherDados(dados)
+})
+
+Cypress.Commands.add('apenasSalarioInvalido', () => {
+    cy.get(SELECT_FORMS.SALARY).should('have.css', 'border-color', 'rgb(220, 53, 69)')
+})
+
+Cypress.Commands.add('apenasIdadeInvalido', () => {
+    cy.get(SELECT_FORMS.AGE).should('have.css', 'border-color', 'rgb(220, 53, 69)')
 })

@@ -12,6 +12,8 @@ Este projeto tem como objetivo automatizar testes end-to-end utilizando [Cypress
 
 ## Cenários
 
+   - **cypress/e2e/formsFailed.feature**: Contém os cenários que simulam falhas durante o preenchimento do formulário de cadastro.
+   -**cypress/e2e/formsSuccess.feature**: ontém os cenários que verificam o preenchimento bem-sucedido do formulário de cadastro.
 
 ## Estrutura do Projeto
 
@@ -31,6 +33,7 @@ Este projeto tem como objetivo automatizar testes end-to-end utilizando [Cypress
    ```bash
    git clone https://github.com/caioguimaraesr/Academia_Accenture2025.git
    cd Academia_Accenture2025
+   ```
 
 2. **Instale as dependências:**
     ```bash
@@ -44,7 +47,7 @@ Este projeto tem como objetivo automatizar testes end-to-end utilizando [Cypress
    npx cypress open
    ```
 
-   - Abrir o Cypress em no modo headless
+   - Abrir o Cypress no modo headless
    
    ```bash
    npx cypress run
