@@ -68,7 +68,7 @@ Este projeto tem como objetivo automatizar testes end-to-end utilizando [Cypress
    <a href="https://github.com/caioguimaraesr">
       <img src="https://avatars.githubusercontent.com/caioguimaraesr" alt="Caio" width="100" style="border-radius: 50%; margin: 10px;" />
       <br>
-      <strong style="font-size: 12px;">▶️ Caio G Rocha</strong>
+      <strong style="font-size: 17px;">Caio G Rocha</strong>
    </a>
    <br>
 </td>

@@ -78,9 +78,12 @@ Cypress.Commands.add('clickRemoveIcon', () => {
 
 Cypress.Commands.add('validarUsuarioDeletado', () => {
     cy.get(TABLE_USER)
-    .should('not.contain' , Cypress.env('DELETE_FIRST_NAME'), {log: false})
-    .and('not.contain', Cypress.env('DELETE_LAST_NAME'), {log: false})
-    .and('not.contain', Cypress.env('DELETE_EMAIL'), {log: false})
+    .should('not.contain' , Cypress.env('FIRST_NAME'), {log: false})
+    .and('not.contain', Cypress.env('LAST_NAME'), {log: false})
+    .and('not.contain', Cypress.env('EMAIL'), {log: false})
+
+    cy.log('Usuario deletado com sucesso!')
+
 })
 
 Cypress.Commands.add('formsEmailInvalido', () => {
